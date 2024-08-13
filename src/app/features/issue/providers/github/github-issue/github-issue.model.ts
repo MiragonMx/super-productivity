@@ -25,6 +25,9 @@ export type GithubIssueReduced = Readonly<{
   id: number;
   number: number;
 
+  // to include labels as tags
+  labels: GithubLabel[];
+
   // removed
   // node_id: string;
   // assignees: GithubOriginalUser[];
