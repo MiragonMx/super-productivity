@@ -7,12 +7,16 @@ import { GithubApiService } from './github-api.service';
 import { ProjectService } from '../../../project/project.service';
 import { SearchResultItem } from '../../issue.model';
 import { GithubCfg } from './github.model';
-import { GithubIssue, GithubIssueReduced, GithubLabel } from './github-issue/github-issue.model';
+import {
+  GithubIssue,
+  GithubIssueReduced,
+  GithubLabel,
+} from './github-issue/github-issue.model';
 import { truncate } from '../../../../util/truncate';
 import { getTimestamp } from '../../../../util/get-timestamp';
 import { isGithubEnabled } from './is-github-enabled.util';
 import { GITHUB_INITIAL_POLL_DELAY, GITHUB_POLL_INTERVAL } from './github.const';
-import { TagService } from '../../tag/tag.service';
+import { TagService } from '../../../tag/tag.service';
 
 @Injectable({
   providedIn: 'root',
@@ -178,12 +182,11 @@ export class GithubCommonInterfacesService implements IssueServiceInterface {
     return issue.state === 'closed';
   }
 
-  private _getGithubLabelsAsTags(labels: GithubLabel[]): string[]{
-  let getTagIds : string[] = [];
-  labels.forEach((label: GithubLabel) =>{
-    getTagIds.push(this._tagService.addTag({ title: label.name, color: label.color }));
-  }, this);
-  return getTagIds;
-}
-
+  private _getGithubLabelsAsTags(labels: GithubLabel[]): string[] {
+    const getTagIds: string[] = [];
+    labels.forEach((label: GithubLabel) => {
+      getTagIds.push(this._tagService.addTag({ title: label.name, color: label.color }));
+    }, this);
+    return getTagIds;
+  }
 }
