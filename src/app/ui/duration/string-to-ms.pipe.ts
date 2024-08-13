@@ -11,6 +11,7 @@ export const stringToMs = (strValue: string, args?: any): number => {
   let s: number | undefined;
 
   const arrValue = strValue.split(' ');
+  // XXX: split here between time shorthand chars as well?
 
   arrValue.forEach((val: string) => {
     if (val.length > 0) {
